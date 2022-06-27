@@ -28,23 +28,20 @@ const cardsRender = () => {
         const progressContainer = document.createElement('div');
         const progressLine = document.createElement('div');
 
-
         photoElem.setAttribute('src', photo);
         photoElem.setAttribute('alt', 'photo of worker');
         emailElem.setAttribute('href', `mailto:${email}`);
-
 
         firstnameElem.innerText = `First name: ${firstname}`;
         lastnameElem.innerText = `Last name: ${lastname}`;
         ageElem.innerText = `Age: ${age}`;
         salaryElem.innerText = `Salary: ${rate * days}`;
         emailElem.innerText = email;
-        progressLine.style.width = progress;
+        progressLine.style.width = progress + '%';
         progressLine.innerText = progress + '%';
 
         progressLine.classList.add('progress-line');
         progressContainer.classList.add('progress-container');
-
 
         progressContainer.append(progressLine);
         container.append(firstnameElem, lastnameElem, ageElem, salaryElem, emailElem, photoElem, progressContainer);
@@ -68,13 +65,14 @@ formElem.addEventListener('submit', e => {
     })
     firstname.value = '',
         lastname.value = '';
-    age.value = '';
-    rate.value = '';
-    days.value = '';
-    email.value = '';
-    photo.value = '';
-    progress.value = '';
+        age.value = '';
+        rate.value = '';
+        days.value = '';
+        email.value = '';
+        photo.value = '';
+        progress.value = '';
 
     console.log(workersArr);
+
     cardsRender()
 })
