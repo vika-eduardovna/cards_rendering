@@ -16,7 +16,7 @@ const cardsRender = () => {
     const cardsContainer = document.querySelector('.cards_container');
     cardsContainer.innerText = '';
     
-    workersArr.forEach(({ firstname, lastname, age, rate, days, photo }) => {
+    workersArr.forEach(({ firstname, lastname, age, rate, days, email, photo, progress }) => {
         const container = document.createElement('div');
         container.classList.add('card');
         const firstnameElem = document.createElement('p');
@@ -24,37 +24,44 @@ const cardsRender = () => {
         const ageElem = document.createElement('p');
         const salaryElem = document.createElement('p');
         const photoElem = document.createElement('img');
+        const emailElem = document.createElement('a');
 
+        photoElem.setAttribute('src', photo);
+        photoElem.setAttribute('alt', 'photo of worker');
+        emailElem.setAttribute('href', email);
 
         firstnameElem.innerText = `First name: ${firstname}`;
         lastnameElem.innerText = `Last name: ${lastname}`;
         ageElem.innerText = `Age: ${age}`;
         salaryElem.innerText = `Salary: ${rate*days}`;
-        photoElem.setAttribute('src', photo);
-        photoElem.setAttribute('alt', 'photo of worker');
+        emailElem.innerText = `Email: ${email}`;
 
-        container.append(firstnameElem, lastnameElem, ageElem, salaryElem, photoElem);
+        container.append(firstnameElem, lastnameElem, ageElem, salaryElem, emailElem, photoElem,);
         cardsContainer.append(container)
     })
 }
 
 formElem.addEventListener('submit', (e) => {
     e.preventDefault();
-    const { firstname, lastname, age, rate, days, photo } = e.target;
+    const { firstname, lastname, age, rate, days, email, photo, progress } = e.target;
     workersArr.push({
         firstname: firstname.value,
         lastname: lastname.value,
         age: age.value,
         rate: rate.value,
         days: days.value, 
+        email: email.value,
         photo: photo.value,
+        
     })
         firstname.value = '',
         lastname.value = '';
         age.value = '';
         rate.value = '';
         days.value = '';
+        email.value = '';
         photo.value = '';
+        
     console.log(workersArr);
     cardsRender()
 })
