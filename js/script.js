@@ -11,44 +11,50 @@
 const formElem = document.querySelector('.workers_form');
 let workersArr = [];
 
-
-
 const cardsRender = () => {
 
     const cardsContainer = document.querySelector('.cards_container');
     cardsContainer.innerText = '';
-    workersArr.forEach(({ firstname, lastname, age, rate, days }) => {
+    
+    workersArr.forEach(({ firstname, lastname, age, rate, days, photo }) => {
         const container = document.createElement('div');
+        container.classList.add('card');
         const firstnameElem = document.createElement('p');
         const lastnameElem = document.createElement('p');
         const ageElem = document.createElement('p');
         const salaryElem = document.createElement('p');
+        const photoElem = document.createElement('img');
+
 
         firstnameElem.innerText = `First name: ${firstname}`;
         lastnameElem.innerText = `Last name: ${lastname}`;
         ageElem.innerText = `Age: ${age}`;
         salaryElem.innerText = `Salary: ${rate*days}`;
+        photoElem.setAttribute('src', photo);
+        photoElem.setAttribute('alt', 'photo of worker');
 
-        container.append(firstnameElem, lastnameElem, ageElem, salaryElem);
+        container.append(firstnameElem, lastnameElem, ageElem, salaryElem, photoElem);
         cardsContainer.append(container)
     })
 }
 
 formElem.addEventListener('submit', (e) => {
     e.preventDefault();
-    const { firstname, lastname, age, rate, days } = e.target;
+    const { firstname, lastname, age, rate, days, photo } = e.target;
     workersArr.push({
         firstname: firstname.value,
         lastname: lastname.value,
         age: age.value,
         rate: rate.value,
         days: days.value, 
+        photo: photo.value,
     })
         firstname.value = '',
         lastname.value = '';
         age.value = '';
         rate.value = '';
         days.value = '';
+        photo.value = '';
     console.log(workersArr);
     cardsRender()
 })

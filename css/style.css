@@ -7,3 +7,18 @@ button {
     width: 100px;
     margin-top: 20px;
 }
+.card {
+    border: 2px solid black;
+    width: 350px;
+    height: 350px;
+}
+.cards_container {
+    display: flex;
+    gap: 20px;
+}
+.cards_container img {
+    width: 70%;
+    height: 150px;
+    margin: 10px;
+    object-fit: cover;
+}
