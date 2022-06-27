@@ -15,7 +15,7 @@ const cardsRender = () => {
 
     const cardsContainer = document.querySelector('.cards_container');
     cardsContainer.innerText = '';
-    
+
     workersArr.forEach(({ firstname, lastname, age, rate, days, email, photo, progress }) => {
         const container = document.createElement('div');
         container.classList.add('card');
@@ -25,23 +25,34 @@ const cardsRender = () => {
         const salaryElem = document.createElement('p');
         const photoElem = document.createElement('img');
         const emailElem = document.createElement('a');
+        const progressContainer = document.createElement('div');
+        const progressLine = document.createElement('div');
+
 
         photoElem.setAttribute('src', photo);
         photoElem.setAttribute('alt', 'photo of worker');
-        emailElem.setAttribute('href', email);
+        emailElem.setAttribute('href', `mailto:${email}`);
+
 
         firstnameElem.innerText = `First name: ${firstname}`;
         lastnameElem.innerText = `Last name: ${lastname}`;
         ageElem.innerText = `Age: ${age}`;
-        salaryElem.innerText = `Salary: ${rate*days}`;
-        emailElem.innerText = `Email: ${email}`;
+        salaryElem.innerText = `Salary: ${rate * days}`;
+        emailElem.innerText = email;
+        progressLine.style.width = progress;
+        progressLine.innerText = progress + '%';
 
-        container.append(firstnameElem, lastnameElem, ageElem, salaryElem, emailElem, photoElem,);
+        progressLine.classList.add('progress-line');
+        progressContainer.classList.add('progress-container');
+
+
+        progressContainer.append(progressLine);
+        container.append(firstnameElem, lastnameElem, ageElem, salaryElem, emailElem, photoElem, progressContainer);
         cardsContainer.append(container)
     })
 }
 
-formElem.addEventListener('submit', (e) => {
+formElem.addEventListener('submit', e => {
     e.preventDefault();
     const { firstname, lastname, age, rate, days, email, photo, progress } = e.target;
     workersArr.push({
@@ -49,19 +60,21 @@ formElem.addEventListener('submit', (e) => {
         lastname: lastname.value,
         age: age.value,
         rate: rate.value,
-        days: days.value, 
+        days: days.value,
         email: email.value,
         photo: photo.value,
-        
+        progress: progress.value,
+
     })
-        firstname.value = '',
+    firstname.value = '',
         lastname.value = '';
-        age.value = '';
-        rate.value = '';
-        days.value = '';
-        email.value = '';
-        photo.value = '';
-        
+    age.value = '';
+    rate.value = '';
+    days.value = '';
+    email.value = '';
+    photo.value = '';
+    progress.value = '';
+
     console.log(workersArr);
     cardsRender()
 })
